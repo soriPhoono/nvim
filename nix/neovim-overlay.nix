@@ -44,10 +44,8 @@ with final.pkgs.lib; let
     cmp-cmdline-history # cmp command line history suggestions
     # ^ nvim-cmp extensions
     # git integration plugins
-    diffview-nvim # https://github.com/sindrets/diffview.nvim/
-    neogit # https://github.com/TimUntersberger/neogit/
     gitsigns-nvim # https://github.com/lewis6991/gitsigns.nvim/
-    vim-fugitive # https://github.com/tpope/vim-fugitive/
+    lazygit-nvim
     # ^ git integration plugins
     # telescope and extensions
     telescope-nvim # https://github.com/nvim-telescope/telescope.nvim/
@@ -85,6 +83,9 @@ with final.pkgs.lib; let
   ];
 
   extraPackages = with pkgs; [
+    # UI tools
+    lazygit
+
     # language servers, etc.
     lua-language-server
     nil # nix LSP

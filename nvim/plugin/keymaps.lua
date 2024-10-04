@@ -8,6 +8,9 @@ local fn = vim.fn
 local keymap = vim.keymap
 local diagnostic = vim.diagnostic
 
+-- LazyGit keybinds
+keymap.set('n', '<leader>gg', '<cmd>LazyGit<CR>', { silent = true, desc = 'Open LazyGit menu' })
+
 -- Yank from current position till end of current line
 keymap.set('n', 'Y', 'y$', { silent = true, desc = '[Y]ank to end of line' })
 
