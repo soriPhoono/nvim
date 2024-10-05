@@ -42,31 +42,25 @@ cmp.setup {
         nvim_lsp_document_symbol = '[LSP]',
         nvim_lua = '[API]',
         path = '[PATH]',
-        luasnip = '[SNIP]',
       },
     },
   },
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-    end,
-  },
   mapping = {
-    ['<C-b>'] = cmp.mapping(function(_)
+    ['<C-j>'] = cmp.mapping(function(_)
       if cmp.visible() then
         cmp.scroll_docs(-4)
       else
         complete_with_source('buffer')
       end
     end, { 'i', 'c', 's' }),
-    ['<C-f>'] = cmp.mapping(function(_)
+    ['<C-k>'] = cmp.mapping(function(_)
       if cmp.visible() then
         cmp.scroll_docs(4)
       else
         complete_with_source('path')
       end
     end, { 'i', 'c', 's' }),
-    ['<C-n>'] = cmp.mapping(function(fallback)
+    ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
         -- expand_or_jumpable(): Jump outside the snippet region
@@ -77,7 +71,7 @@ cmp.setup {
         fallback()
       end
     end, { 'i', 'c', 's' }),
-    ['<C-p>'] = cmp.mapping(function(fallback)
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       else
@@ -92,7 +86,7 @@ cmp.setup {
         cmp.complete()
       end
     end, { 'i', 'c', 's' }),
-    ['<C-y>'] = cmp.mapping.confirm {
+    ['<CR>'] = cmp.mapping.confirm {
       select = true,
     },
   },
@@ -126,7 +120,6 @@ cmp.setup.cmdline({ '/', '?' }, {
   sources = {
     { name = 'nvim_lsp_document_symbol', keyword_length = 3 },
     { name = 'buffer' },
-    { name = 'cmdline_history' },
   },
   view = {
     entries = { name = 'wildmenu', separator = '|' },
@@ -137,22 +130,7 @@ cmp.setup.cmdline({ '/', '?' }, {
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources {
-    { name = 'cmdline' },
-    { name = 'cmdline_history' },
     { name = 'path' },
   },
 })
 
-vim.keymap.set({ 'i', 'c', 's' }, '<C-n>', cmp.complete, { noremap = false, desc = '[cmp] complete' })
-vim.keymap.set({ 'i', 'c', 's' }, '<C-f>', function()
-  complete_with_source('path')
-end, { noremap = false, desc = '[cmp] path' })
-vim.keymap.set({ 'i', 'c', 's' }, '<C-o>', function()
-  complete_with_source('nvim_lsp')
-end, { noremap = false, desc = '[cmp] lsp' })
-vim.keymap.set({ 'c' }, '<C-h>', function()
-  complete_with_source('cmdline_history')
-end, { noremap = false, desc = '[cmp] cmdline history' })
-vim.keymap.set({ 'c' }, '<C-c>', function()
-  complete_with_source('cmdline')
-end, { noremap = false, desc = '[cmp] cmdline' })
