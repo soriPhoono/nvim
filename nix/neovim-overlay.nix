@@ -81,6 +81,7 @@ with final.pkgs.lib; let
     # language servers, etc.
     lua-language-server
     nil # nix LSP
+    python312Packages.python-lsp-server
   ];
 in {
   # This is the neovim derivation
