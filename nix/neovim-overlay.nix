@@ -64,10 +64,12 @@ with final.pkgs.lib; let
     plenary-nvim
     nvim-web-devicons
     nui-nvim
+    nvim-notify
     vim-repeat
     # General stuff
     which-key-nvim
     mini-nvim
+    noice-nvim
   ];
 
   extraPackages = with pkgs; [
