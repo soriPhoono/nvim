@@ -53,13 +53,15 @@ with final.pkgs.lib; let
     nvim-treesitter-context # nvim-treesitter-context
     neo-tree-nvim
     trouble-nvim
-    # language support
+    noice-nvim
     # navigation/editing enhancement plugins
     nvim-surround # https://github.com/kylechui/nvim-surround/
+    comment-nvim
     nvim-treesitter-textobjects # https://github.com/nvim-treesitter/nvim-treesitter-textobjects/
     nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
     # Useful utilities
     nvim-unception # Prevent nested neovim sessions | nvim-unception
+    which-key-nvim
     # libraries that other plugins depend on
     sqlite-lua
     plenary-nvim
@@ -67,9 +69,6 @@ with final.pkgs.lib; let
     nui-nvim
     nvim-notify
     vim-repeat
-    # General stuff
-    which-key-nvim
-    noice-nvim
   ];
 
   extraPackages = with pkgs; [
