@@ -1,6 +1,6 @@
 vim.bo.comments = ':#'
 
-local py_ls_cmd = 'python-lsp-server'
+local py_ls_cmd = 'pylsp'
 
 if vim.fn.executable(py_ls_cmd) ~= 1 then
   return
