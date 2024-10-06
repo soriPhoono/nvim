@@ -19,9 +19,11 @@ fn.sign_define("DiagnosticSignHint",
   { text = "󰌵", texthl = "DiagnosticSignHint" })
 
 keymap.set('n', '<leader>e', '<cmd>Neotree toggle<cr>', { silent = true, desc = "Open file explorer" })
+keymap.set('n', '<leader>t', '<cmd>Trouble diagnostics<CR>', { silent = true, desc = "Open diagnostics browser" })
 
 require('neo-tree').setup({
   close_if_last_window = true,
 })
+require('trouble').setup()
 require('nvim-surround').setup()
 require('mini.starter').setup()
