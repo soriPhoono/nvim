@@ -63,12 +63,16 @@ with final.pkgs.lib; let
     sqlite-lua
     plenary-nvim
     nvim-web-devicons
+    nui-nvim
     vim-repeat
     # General stuff
     which-key-nvim
   ];
 
   extraPackages = with pkgs; [
+    # General dependencies
+    ripgrep
+
     # UI tools
     lazygit
 
