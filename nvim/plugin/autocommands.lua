@@ -43,11 +43,6 @@ local function peek_definition()
   return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
 end
 
-local function peek_type_definition()
-  local params = vim.lsp.util.make_position_params()
-  return vim.lsp.buf_request(0, 'textDocument/typeDefinition', params, preview_location_callback)
-end
-
 --- Don't create a comment string when hitting <Enter> on a comment line
 vim.api.nvim_create_autocmd('BufEnter', {
   group = vim.api.nvim_create_augroup('DisableNewLineAutoCommentString', {}),
@@ -73,14 +68,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local function desc(description)
       return { noremap = true, silent = true, buffer = bufnr, desc = description }
     end
-    keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, desc('lsp [g]o to [D]eclaration'))
-    keymap.set('n', '<leader>gd', vim.lsp.buf.definition, desc('lsp [g]o to [d]efinition'))
-    keymap.set('n', '<leader>k', vim.lsp.buf.hover, desc('[lsp] hover'))
-    keymap.set('n', '<leader>pd', peek_definition, desc('lsp [p]eek [d]efinition'))
-    keymap.set('n', '<leader>K', vim.lsp.buf.signature_help, desc('[lsp] signature help'))
-    keymap.set('n', '<leader>rn', vim.lsp.buf.rename, desc('lsp [r]e[n]ame'))
-    keymap.set('n', '<leader>gr', vim.lsp.buf.references, desc('lsp [g]et [r]eferences'))
-    keymap.set('n', '<leader>f', function()
+    keymap.set('n', '<leader>lD', vim.lsp.buf.declaration, desc('lsp [g]o to [D]eclaration'))
+    keymap.set('n', '<leader>ld', vim.lsp.buf.definition, desc('lsp [g]o to [d]efinition'))
+    keymap.set('n', '<leader>lk', vim.lsp.buf.hover, desc('[lsp] hover'))
+    keymap.set('n', '<leader>ld', peek_definition, desc('lsp [p]eek [d]efinition'))
+    keymap.set('n', '<leader>lK', vim.lsp.buf.signature_help, desc('[lsp] signature help'))
+    keymap.set('n', '<leader>lrn', vim.lsp.buf.rename, desc('lsp [r]e[n]ame'))
+    keymap.set('n', '<leader>lr', vim.lsp.buf.references, desc('lsp [g]et [r]eferences'))
+    keymap.set('n', '<leader>lf', function()
       vim.lsp.buf.format { async = true }
     end, desc('[lsp] [f]ormat buffer'))
 

@@ -7,7 +7,6 @@ local cmd = vim.cmd
 
 require('catppuccin').setup({
   flavor = "mocha",
-  transparent_background = true,
 })
 
 cmd.colorscheme "catppuccin"

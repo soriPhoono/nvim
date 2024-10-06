@@ -7,7 +7,7 @@ local api = vim.api
 local keymap = vim.keymap
 
 -- Plugin related keybindings
-keymap.set('n', '<leader>gg', '<cmd>LazyGit<CR>', { silent = true, desc = 'Open LazyGit menu' })
+keymap.set('n', '<leader>g', '<cmd>LazyGit<CR>', { silent = true, desc = 'Open LazyGit menu' })
 
 -- Editor save and quit functions
 keymap.set('n', '<leader>w', '<cmd>w<CR>',

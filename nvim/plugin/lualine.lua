@@ -27,7 +27,7 @@ local function extra_mode_status()
   return ''
 end
 
-require('lualine').setup {
+require('lualine').setup({
   globalstatus = true,
   sections = {
     lualine_c = {
@@ -53,4 +53,4 @@ require('lualine').setup {
     },
   },
   extensions = { 'fugitive', 'fzf', 'toggleterm', 'quickfix' },
-}
+})
