@@ -14,7 +14,7 @@ keymap.set('n', '<leader>w', '<cmd>w<CR>',
   { silent = true, desc = 'Save current buffer' })
 keymap.set('n', '<leader>q', '<cmd>q<CR>',
   { silent = true, desc = 'Quit current buffer' })
-keymap.set('n', '<leader>Q', '<cmd>qa!<CR>',
+keymap.set('n', '<leader>Q', '<cmd>qa<CR>',
   { silent = true, desc = 'Quit current buffer without saving' })
 
 -- Resize vertical splits

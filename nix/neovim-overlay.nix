@@ -69,7 +69,6 @@ with final.pkgs.lib; let
     vim-repeat
     # General stuff
     which-key-nvim
-    mini-nvim
     noice-nvim
   ];
 

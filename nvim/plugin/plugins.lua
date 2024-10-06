@@ -18,4 +18,3 @@ require('gitsigns').setup({
 })
 require('trouble').setup()
 require('nvim-surround').setup()
-require('mini.starter').setup()
