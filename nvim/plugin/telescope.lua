@@ -4,7 +4,6 @@ end
 vim.g.did_load_telescope_plugin = true
 
 local telescope = require('telescope')
-local actions = require('telescope.actions')
 
 local builtin = require('telescope.builtin')
 
@@ -32,18 +31,6 @@ telescope.setup {
   defaults = {
     path_display = {
       'truncate',
-    },
-    mappings = {
-      i = {
-        ['<C-q>'] = actions.send_to_qflist,
-        ['<C-l>'] = actions.send_to_loclist,
-        -- ['<esc>'] = actions.close,
-        ['<C-s>'] = actions.cycle_previewers_next,
-        ['<C-a>'] = actions.cycle_previewers_prev,
-      },
-      n = {
-        q = actions.close,
-      },
     },
     preview = {
       treesitter = true,
