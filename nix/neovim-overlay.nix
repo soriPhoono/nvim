@@ -79,9 +79,9 @@ with final.pkgs.lib; let
     lazygit
 
     # language servers, etc.
-    taplo
     lua-language-server
     nil # nix LSP
+    rust-analyzer
     python312Packages.python-lsp-server
   ];
 in {
