@@ -4,7 +4,6 @@ end
 
 local root_files = {
   'pyproject.toml',
-  '.git',
 }
 
 vim.lsp.start {
