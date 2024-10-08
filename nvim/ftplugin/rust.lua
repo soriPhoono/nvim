@@ -1,5 +1,3 @@
-vim.bo.comments = '# ,//'
-
 local rust_analyzer_cmd = 'rust_analyzer'
 
 if vim.fn.executable(rust_analyzer_cmd) ~= 1 then
@@ -7,7 +5,8 @@ if vim.fn.executable(rust_analyzer_cmd) ~= 1 then
 end
 
 local root_files = {
-  'Cargo.toml'
+  'Cargo.toml',
+  '.git'
 }
 
 vim.lsp.start {
