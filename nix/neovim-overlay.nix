@@ -81,7 +81,7 @@ with final.pkgs.lib; let
 
     # language servers, etc.
     lua-language-server
-    nil # nix LSP
+    nixd # nix LSP
     rust-analyzer
     python312Packages.python-lsp-server
   ];
