@@ -56,11 +56,11 @@ with final.pkgs.lib; let
     noice-nvim
     # navigation/editing enhancement plugins
     nvim-surround # https://github.com/kylechui/nvim-surround/
-    comment-nvim
     nvim-treesitter-textobjects # https://github.com/nvim-treesitter/nvim-treesitter-textobjects/
     nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
     # Useful utilities
     nvim-unception # Prevent nested neovim sessions | nvim-unception
+    vim-commentary
     which-key-nvim
     rustaceanvim
     # libraries that other plugins depend on
