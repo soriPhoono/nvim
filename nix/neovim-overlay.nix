@@ -28,7 +28,9 @@ with final.pkgs.lib; let
   all-plugins = with pkgs.vimPlugins; [
     # plugins from nixpkgs go in here.
     catppuccin-nvim
-    # https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=vimPlugins
+
+    rustaceanvim
+
     nvim-treesitter.withAllGrammars
     # nvim-cmp (autocompletion) and extensions
     nvim-cmp # https://github.com/hrsh7th/nvim-cmp
@@ -60,9 +62,7 @@ with final.pkgs.lib; let
     nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
     # Useful utilities
     nvim-unception # Prevent nested neovim sessions | nvim-unception
-    vim-commentary
     which-key-nvim
-    rustaceanvim
     # libraries that other plugins depend on
     sqlite-lua
     plenary-nvim
