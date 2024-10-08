@@ -8,7 +8,7 @@ vim.g.did_load_plugins_plugin = true
 
 local keymap = vim.keymap
 
-keymap.set('n', '<leader>t', '<cmd>Trouble diagnostics<CR>',
+keymap.set('n', '<leader>d', '<cmd>Trouble diagnostics<CR>',
   { silent = true, desc = "Open diagnostics browser" })
 keymap.set('n', '<leader>c', '<cmd>Comment<CR>', { silent = true, desc = "Comment current line" })
 
@@ -20,3 +20,6 @@ require('gitsigns').setup({
 })
 require('trouble').setup()
 require('nvim-surround').setup()
+require('toggleterm').setup({
+  direction = "float",
+})

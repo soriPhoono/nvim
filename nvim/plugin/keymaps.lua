@@ -8,6 +8,7 @@ local keymap = vim.keymap
 
 -- Plugin related keybindings
 keymap.set('n', '<leader>g', '<cmd>LazyGit<CR>', { silent = true, desc = 'Open LazyGit menu' })
+keymap.set('n', '<leader>t', '<cmd>ToggleTerm<CR>', { silent = true, desc = 'Open terminal' })
 
 -- Editor save and quit functions
 keymap.set('n', '<leader>w', '<cmd>w<CR>',
