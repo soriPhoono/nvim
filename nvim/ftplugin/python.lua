@@ -1,5 +1,3 @@
-vim.bo.comments = '# '
-
 local pylsp_cmd = 'pylsp'
 
 if vim.fn.executable(pylsp_cmd) ~= 1 then

@@ -62,7 +62,7 @@ with final.pkgs.lib; let
     # Useful utilities
     nvim-unception # Prevent nested neovim sessions | nvim-unception
     which-key-nvim
-    nvim-lspconfig
+    rustaceanvim
     # libraries that other plugins depend on
     sqlite-lua
     plenary-nvim
@@ -78,12 +78,6 @@ with final.pkgs.lib; let
 
     # UI tools
     lazygit
-
-    # language servers, etc.
-    lua-language-server
-    nixd # nix LSP
-    rust-analyzer
-    python312Packages.python-lsp-server
   ];
 in {
   # This is the neovim derivation
