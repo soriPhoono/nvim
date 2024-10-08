@@ -62,6 +62,7 @@ with final.pkgs.lib; let
     # Useful utilities
     nvim-unception # Prevent nested neovim sessions | nvim-unception
     which-key-nvim
+    nvim-lspconfig
     # libraries that other plugins depend on
     sqlite-lua
     plenary-nvim
