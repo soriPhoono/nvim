@@ -1,4 +1,4 @@
-vim.bo.comments = ':#'
+vim.bo.comments = ':# '
 
 local nil_ls_cmd = 'nil'
 
