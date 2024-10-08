@@ -4,8 +4,9 @@ end
 vim.g.did_load_telescope_plugin = true
 
 local telescope = require('telescope')
-
 local builtin = require('telescope.builtin')
+
+local keymap = vim.keymap
 
 -- Fall back to find_files if not in a git repo
 local project_files = function()
@@ -16,16 +17,9 @@ local project_files = function()
   end
 end
 
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'live grep' })
-vim.keymap.set('n', '<C-f>', builtin.grep_string, { desc = 'grep current string' })
-vim.keymap.set('n', '<leader>ff', project_files, { desc = 'find project files' })
-vim.keymap.set(
-  'n',
-  '<leader>fb',
-  builtin.current_buffer_fuzzy_find,
-  { desc = 'find buffer' }
-)
-vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'find symbols (lsp)' })
+keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'live grep' })
+keymap.set('n', '<leader>ff', project_files, { desc = 'find project files' })
+keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'find symbols (lsp)' })
 
 telescope.setup {
   defaults = {
