@@ -78,6 +78,10 @@ with final.pkgs.lib; let
 
     # UI tools
     lazygit
+
+    # LSP clients
+    nixd
+    lua-language-server
   ];
 in {
   # This is the neovim derivation
