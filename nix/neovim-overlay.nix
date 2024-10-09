@@ -23,7 +23,9 @@ with final.pkgs.lib; let
     catppuccin-nvim
 
     # LSP automation
+    nvim-lspconfig
     rustaceanvim
+    typescript-tools-nvim
 
     # Syntax highlighting and folding
     nvim-treesitter.withAllGrammars

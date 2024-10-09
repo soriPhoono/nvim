@@ -10,3 +10,5 @@ require('toggleterm').setup({
 require('which-key').setup({
   preset = "helix"
 })
+
+require('typescript-tools').setup({})
