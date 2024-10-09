@@ -1,27 +1,18 @@
 local cmd = vim.cmd
-local fn = vim.fn
 local opt = vim.o
 local g = vim.g
 
--- <leader> key. Defaults to `\`. Some people prefer space.
 g.mapleader = ' '
 g.maplocalleader = ' '
+g.sqlite_clib_path = vim.env.LIBSQLITE
 
-opt.compatible = false
-
--- Enable true colour support
-if fn.has('termguicolors') then
-  opt.termguicolors = true
-end
-
--- See :h <option> to see what the options do
-
--- Search down into subfolders
+opt.termguicolors = true
 opt.path = vim.o.path .. '**'
+opt.colorcolumn = '80'
+opt.updatetime = 500 
 
 opt.number = true
 opt.cursorline = true
-opt.showmatch = true -- Highlight matching parentheses, etc
 opt.incsearch = true
 opt.hlsearch = true
 
@@ -34,16 +25,12 @@ opt.softtabstop = 2
 opt.shiftwidth = 2
 opt.foldenable = true
 opt.history = 2000
-opt.nrformats = 'bin,hex' -- 'octal'
+opt.nrformats = 'bin,hex'
 opt.undofile = true
 opt.splitright = true
 opt.splitbelow = true
 opt.cmdheight = 0
 opt.laststatus = 3
-
-opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-
--- Configure Neovim diagnostic messages
 
 local function prefix_diagnostic(prefix, diagnostic)
   return string.format(prefix .. ' %s', diagnostic.message)
@@ -91,13 +78,8 @@ vim.diagnostic.config {
   },
 }
 
-g.editorconfig = true
+require('catppuccin').setup({
+  flavor = "mocha",
+})
 
-vim.opt.colorcolumn = '100'
-
--- Native plugins
-cmd.filetype('plugin', 'indent', 'on')
-cmd.packadd('cfilter') -- Allows filtering the quickfix list with :cfdo
-
--- let sqlite.lua (which some plugins depend on) know where to find sqlite
-vim.g.sqlite_clib_path = require('luv').os_getenv('LIBSQLITE')
+cmd.colorscheme "catppuccin"

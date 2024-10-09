@@ -20,14 +20,16 @@ configs.setup {
       end
     end,
   },
+  indentation = {
+    enable = true,
+  }
 }
+
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 require('treesitter-context').setup {
   max_lines = 3,
 }
 
 require('ts_context_commentstring').setup()
-
--- Tree-sitter based folding
--- vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'

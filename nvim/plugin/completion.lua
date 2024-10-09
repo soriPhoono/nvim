@@ -14,19 +14,9 @@ local function has_words_before()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
----@param source string|table
-local function complete_with_source(source)
-  if type(source) == 'string' then
-    cmp.complete { config = { sources = { { name = source } } } }
-  elseif type(source) == 'table' then
-    cmp.complete { config = { sources = { source } } }
-  end
-end
-
 cmp.setup {
   completion = {
     completeopt = 'menu,menuone,noinsert',
-    -- autocomplete = false,
   },
   formatting = {
     format = lspkind.cmp_format {
@@ -35,9 +25,7 @@ cmp.setup {
       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
       menu = {
-        buffer = '[BUF]',
         nvim_lsp = '[LSP]',
-        nvim_lsp_signature_help = '[LSP]',
         nvim_lsp_document_symbol = '[LSP]',
         nvim_lua = '[API]',
         path = '[PATH]',
@@ -48,33 +36,21 @@ cmp.setup {
     ['<C-j>'] = cmp.mapping(function(_)
       if cmp.visible() then
         cmp.scroll_docs(-4)
-      else
-        complete_with_source('buffer')
       end
     end, { 'i', 'c', 's' }),
     ['<C-k>'] = cmp.mapping(function(_)
       if cmp.visible() then
         cmp.scroll_docs(4)
-      else
-        complete_with_source('path')
       end
     end, { 'i', 'c', 's' }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
+    ['<Tab>'] = cmp.mapping(function()
       if cmp.visible() then
         cmp.select_next_item()
-        -- expand_or_jumpable(): Jump outside the snippet region
-        -- expand_or_locally_jumpable(): Only jump inside the snippet region
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback()
       end
     end, { 'i', 'c', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
+    ['<S-Tab>'] = cmp.mapping(function()
       if cmp.visible() then
         cmp.select_prev_item()
-      else
-        fallback()
       end
     end, { 'i', 'c', 's' }),
     -- toggle completion
@@ -92,8 +68,6 @@ cmp.setup {
   sources = cmp.config.sources {
     -- The insertion order influences the priority of the sources
     { name = 'nvim_lsp',                keyword_length = 3 },
-    { name = 'nvim_lsp_signature_help', keyword_length = 3 },
-    { name = 'buffer' },
     { name = 'path' },
   },
   enabled = function()
@@ -110,18 +84,6 @@ cmp.setup.filetype('lua', {
     { name = 'nvim_lua' },
     { name = 'nvim_lsp', keyword_length = 3 },
     { name = 'path' },
-  },
-})
-
--- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'nvim_lsp_document_symbol', keyword_length = 3 },
-    { name = 'buffer' },
-  },
-  view = {
-    entries = { name = 'wildmenu', separator = '|' },
   },
 })
 

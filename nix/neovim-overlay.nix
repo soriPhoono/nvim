@@ -22,46 +22,45 @@ with final.pkgs.lib; let
     # plugins from nixpkgs go in here.
     catppuccin-nvim
 
-    rustaceanvim
-
+    # Syntax highlighting and folding
     nvim-treesitter.withAllGrammars
+    
     # nvim-cmp (autocompletion) and extensions
     nvim-cmp # https://github.com/hrsh7th/nvim-cmp
     lspkind-nvim # vscode-like LSP pictograms | https://github.com/onsails/lspkind.nvim/
     cmp-nvim-lsp # LSP as completion source | https://github.com/hrsh7th/cmp-nvim-lsp/
-    cmp-nvim-lsp-signature-help # https://github.com/hrsh7th/cmp-nvim-lsp-signature-help/
-    cmp-buffer # current buffer as completion source | https://github.com/hrsh7th/cmp-buffer/
     cmp-path # file paths as completion source | https://github.com/hrsh7th/cmp-path/
     cmp-nvim-lua # neovim lua API as completion source | https://github.com/hrsh7th/cmp-nvim-lua/
     cmp-cmdline # command line autocompletion | https://github.com/hrsh7th/cmp-cmdline
+
     # git integration plugins
     gitsigns-nvim # https://github.com/lewis6991/gitsigns.nvim/
     lazygit-nvim
+
     # telescope and extensions
     telescope-nvim # https://github.com/nvim-telescope/telescope.nvim/
     telescope-fzy-native-nvim # https://github.com/nvim-telescope/telescope-fzy-native.nvim
-    # telescope-smart-history-nvim # https://github.com/nvim-telescope/telescope-smart-history.nvim
+
     # UI
     lualine-nvim # Status line | https://github.com/nvim-lualine/lualine.nvim/
-    nvim-navic # Add LSP location to lualine | https://github.com/SmiteshP/nvim-navic
-    statuscol-nvim # Status column | https://github.com/luukvbaal/statuscol.nvim/
     nvim-treesitter-context # nvim-treesitter-context
     neo-tree-nvim
     toggleterm-nvim
     noice-nvim
+
     # navigation/editing enhancement plugins
-    nvim-surround # https://github.com/kylechui/nvim-surround/
     nvim-treesitter-textobjects # https://github.com/nvim-treesitter/nvim-treesitter-textobjects/
     nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
+
     # Useful utilities
-    nvim-unception # Prevent nested neovim sessions | nvim-unception
     which-key-nvim
+    nvim-notify
+
     # libraries that other plugins depend on
     sqlite-lua
     plenary-nvim
     nvim-web-devicons
     nui-nvim
-    nvim-notify
     vim-repeat
   ];
 
@@ -71,10 +70,6 @@ with final.pkgs.lib; let
 
     # UI tools
     lazygit
-
-    # LSP clients
-    nixd
-    lua-language-server
   ];
 in {
   # This is the neovim derivation

@@ -3,54 +3,60 @@ if vim.g.did_load_lualine_plugin then
 end
 vim.g.did_load_lualine_plugin = true
 
-local navic = require('nvim-navic')
-navic.setup {}
+local colors = {
+  blue   = '#89b4fa',
+  cyan   = '#89dceb',
+  black  = '#11111b',
+  white  = '#cdd6f4',
+  red    = '#f38ba8',
+  violet = '#cba6f7',
+  grey   = '#313244',
+}
 
----Indicators for special modes,
----@return string status
-local function extra_mode_status()
-  -- recording macros
-  local reg_recording = vim.fn.reg_recording()
-  if reg_recording ~= '' then
-    return ' @' .. reg_recording
-  end
-  -- executing macros
-  local reg_executing = vim.fn.reg_executing()
-  if reg_executing ~= '' then
-    return ' @' .. reg_executing
-  end
-  -- ix mode (<C-x> in insert mode to trigger different builtin completion sources)
-  local mode = vim.api.nvim_get_mode().mode
-  if mode == 'ix' then
-    return '^X: (^]^D^E^F^I^K^L^N^O^Ps^U^V^Y)'
-  end
-  return ''
-end
+local bubbles_theme = {
+  normal = {
+    a = { fg = colors.black, bg = colors.violet },
+    b = { fg = colors.white, bg = colors.grey },
+    c = { fg = colors.white },
+  },
+
+  insert = { a = { fg = colors.black, bg = colors.blue } },
+  visual = { a = { fg = colors.black, bg = colors.cyan } },
+  replace = { a = { fg = colors.black, bg = colors.red } },
+
+  inactive = {
+    a = { fg = colors.white, bg = colors.black },
+    b = { fg = colors.white, bg = colors.black },
+    c = { fg = colors.white },
+  },
+}
 
 require('lualine').setup({
-  globalstatus = true,
-  sections = {
-    lualine_c = {
-      -- nvim-navic
-      { navic.get_location, cond = navic.is_available },
-    },
-    lualine_z = {
-      -- (see above)
-      { extra_mode_status },
-    },
-  },
   options = {
-    theme = 'auto',
+    theme = bubbles_theme,
+    component_separators = '',
+    section_separators = { left = '', right = '' },
   },
-  winbar = {
+  sections = {
+    lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
+    lualine_b = { 'filename', 'branch' },
+    lualine_c = {
+      '%=', --[[ add your center compoentnts here in place of this comment ]]
+    },
+    lualine_x = {},
+    lualine_y = { 'filetype', 'progress' },
     lualine_z = {
-      {
-        'filename',
-        path = 1,
-        file_status = true,
-        newfile_status = true,
-      },
+      { 'location', separator = { right = '' }, left_padding = 2 },
     },
   },
-  extensions = { 'fugitive', 'fzf', 'toggleterm', 'quickfix' },
+  inactive_sections = {
+    lualine_a = { 'filename' },
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = { 'location' },
+  },
+  tabline = {},
+  extensions = {},
 })
