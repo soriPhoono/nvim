@@ -22,6 +22,9 @@ with final.pkgs.lib; let
     # plugins from nixpkgs go in here.
     catppuccin-nvim
 
+    # LSP automation
+    rustaceanvim
+
     # Syntax highlighting and folding
     nvim-treesitter.withAllGrammars
     
