@@ -7,3 +7,6 @@ require('gitsigns').setup()
 require('toggleterm').setup({
   direction = "float",
 })
+require('which-key').setup({
+  preset = "helix"
+})
