@@ -54,8 +54,8 @@
           nixpkgs-fmt
           stylua
           luajitPackages.luacheck
-          shfmt
           shellcheck
+          shfmt
         ];
         shellHook = ''
           # symlink the .luarc.json generated in the overlay

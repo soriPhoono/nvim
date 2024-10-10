@@ -17,6 +17,7 @@ api.nvim_create_autocmd('TermOpen', {
 
 -- LSP
 local lsp_group = api.nvim_create_augroup('UserLsp Config', {})
+
 api.nvim_create_autocmd('LspAttach', {
   group = lsp_group,
   callback = function(ev)

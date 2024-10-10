@@ -25,9 +25,6 @@ configs.setup {
   }
 }
 
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-
 require('treesitter-context').setup {
   max_lines = 3,
 }
