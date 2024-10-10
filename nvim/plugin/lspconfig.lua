@@ -42,9 +42,8 @@ lspconfig.lua_ls.setup {
         enable = false,
       },
       hint = { -- inlay hints (supported in Neovim >= 0.10)
-enable = true,
-},
+        enable = true,
+      },
     },
   },
 }
-

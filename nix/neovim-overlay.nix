@@ -24,8 +24,6 @@ with final.pkgs.lib; let
 
     # LSP automation
     nvim-lspconfig
-    rustaceanvim
-    typescript-tools-nvim
 
     # Syntax highlighting and folding
     nvim-treesitter.withAllGrammars
