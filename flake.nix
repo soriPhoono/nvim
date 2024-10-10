@@ -49,10 +49,13 @@
           # Tools for Lua and Nix development, useful for editing files in this repo
           nixd
           lua-language-server
+	  bash-language-server
 
           nixpkgs-fmt
           stylua
           luajitPackages.luacheck
+	  shellcheck
+	  shfmt
         ];
         shellHook = ''
           # symlink the .luarc.json generated in the overlay
