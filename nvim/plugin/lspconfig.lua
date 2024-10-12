@@ -48,4 +48,6 @@ lspconfig.lua_ls.setup {
   },
 }
 
-require('typescript-tools')
+lspconfig.ts_ls.setup {
+  capabilities = require('user.lsp').make_client_capabilities(),
+}
