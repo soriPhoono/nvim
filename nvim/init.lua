@@ -4,7 +4,6 @@ local g = vim.g
 
 g.mapleader = ' '
 g.maplocalleader = ' '
-g.sqlite_clib_path = vim.env.LIBSQLITE
 
 opt.termguicolors = true
 opt.path = vim.o.path .. '**'

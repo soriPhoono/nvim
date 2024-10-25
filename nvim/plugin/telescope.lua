@@ -29,10 +29,6 @@ telescope.setup {
     preview = {
       treesitter = true,
     },
-    history = {
-      path = vim.fn.stdpath('data') .. '/telescope_history.sqlite3',
-      limit = 1000,
-    },
     color_devicons = true,
     set_env = { ['COLORTERM'] = 'truecolor' },
     prompt_prefix = '   ',

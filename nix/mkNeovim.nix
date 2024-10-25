@@ -29,7 +29,6 @@ with lib;
     withPython3 ? true, # Build Neovim with Python 3 support?
     withRuby ? false, # Build Neovim with Ruby support?
     withNodeJs ? false, # Build Neovim with NodeJS support?
-    withSqlite ? true, # Add sqlite? This is a dependency for some plugins
     # You probably don't want to create vi or vim aliases
     # if the appName is something different than "nvim"
     # Add a "vi" binary to the build output as an alias?
@@ -48,8 +47,6 @@ with lib;
       optional = false;
       runtime = {};
     };
-
-    externalPackages = extraPackages ++ (optionals withSqlite [pkgs.sqlite]);
 
     # Map all plugins to an attrset { plugin = <plugin>; config = <config>; optional = <tf>; ... }
     normalizedPlugins = map (x:
@@ -160,14 +157,8 @@ with lib;
       (optional (appName != "nvim" && appName != null && appName != "")
         ''--set NVIM_APPNAME "${appName}"'')
       # Add external packages to the PATH
-      ++ (optional (externalPackages != [])
-        ''--prefix PATH : "${makeBinPath externalPackages}"'')
-      # Set the LIBSQLITE_CLIB_PATH if sqlite is enabled
-      ++ (optional withSqlite
-        ''--set LIBSQLITE_CLIB_PATH "${pkgs.sqlite.out}/lib/libsqlite3.so"'')
-      # Set the LIBSQLITE environment variable if sqlite is enabled
-      ++ (optional withSqlite
-        ''--set LIBSQLITE "${pkgs.sqlite.out}/lib/libsqlite3.so"'')
+      ++ (optional (extraPackages != [])
+        ''--prefix PATH : "${makeBinPath extraPackages}"'')
     );
 
     luaPackages = neovim-unwrapped.lua.pkgs;

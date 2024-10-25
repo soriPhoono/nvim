@@ -60,7 +60,6 @@ with final.pkgs.lib; let
     nvim-notify
 
     # libraries that other plugins depend on
-    sqlite-lua
     plenary-nvim
     nvim-web-devicons
     nui-nvim
