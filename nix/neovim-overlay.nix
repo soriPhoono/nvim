@@ -45,6 +45,7 @@ with final.pkgs.lib; let
     telescope-fzy-native-nvim # https://github.com/nvim-telescope/telescope-fzy-native.nvim
 
     # UI
+    dashboard-nvim
     lualine-nvim # Status line | https://github.com/nvim-lualine/lualine.nvim/
     nvim-treesitter-context # nvim-treesitter-context
     neo-tree-nvim
@@ -58,6 +59,7 @@ with final.pkgs.lib; let
     # Useful utilities
     which-key-nvim
     nvim-notify
+    autoclose-nvim
 
     # libraries that other plugins depend on
     plenary-nvim

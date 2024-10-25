@@ -10,4 +10,4 @@ require('toggleterm').setup({
 require('which-key').setup({
   preset = "helix"
 })
-
+require('autoclose').setup({})
