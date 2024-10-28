@@ -48,6 +48,10 @@ lspconfig.lua_ls.setup {
   },
 }
 
+lspconfig.clangd.setup {
+  capabilities = require('user.lsp').make_client_capabilities(),
+}
+
 lspconfig.ts_ls.setup {
   capabilities = require('user.lsp').make_client_capabilities(),
 }
