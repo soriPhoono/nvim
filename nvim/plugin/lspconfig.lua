@@ -52,6 +52,10 @@ lspconfig.clangd.setup {
   capabilities = require('user.lsp').make_client_capabilities(),
 }
 
+lspconfig.rust_analyzer.setup {
+  capabilities = require('user.lsp').make_client_capabilities(),
+}
+
 lspconfig.ts_ls.setup {
   capabilities = require('user.lsp').make_client_capabilities(),
 }
