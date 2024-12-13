@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{
   programs.nixvim.plugins = {
     treesitter-context.enable = true;
     ts-context-commentstring.enable = true;
