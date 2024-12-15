@@ -9,7 +9,6 @@
     ];
 
     plugins = {
-      gitsigns.enable = true;
       nui.enable = true;
 
       notify = {
@@ -154,11 +153,6 @@
             };
           };
         };
-
-      neo-tree = {
-        enable = true;
-        closeIfLastWindow = true;
-      };
     };
   };
 }

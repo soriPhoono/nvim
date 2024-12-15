@@ -66,6 +66,20 @@
       };
 
       settings = {
+        snippet = {
+          expand =
+            # lua
+            ''
+              function(args)
+                require('luasnip').lsp_expand(args.body)
+              end
+            '';
+        };
+
+        completion = {
+          completeopt = "menu,menuone,noinsert";
+        };
+
         sources = [
           {
             name = "nvim_lsp";
@@ -91,21 +105,23 @@
           "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
         };
 
-        window = let
-          border = [
-            "╭"
-            "─"
-            "╮"
-            "│"
-            "╯"
-            "─"
-            "╰"
-            "│"
-          ];
-        in{
-          completion.border = border;
-          documentation.border = border;
-        };
+        window =
+          let
+            border = [
+              "╭"
+              "─"
+              "╮"
+              "│"
+              "╯"
+              "─"
+              "╰"
+              "│"
+            ];
+          in
+          {
+            completion.border = border;
+            documentation.border = border;
+          };
       };
     };
   };
