@@ -6,7 +6,6 @@
     ./core/keymaps.nix
 
     ./plugins/cmp.nix
-    ./plugins/conform.nix
     ./plugins/lsp.nix
     ./plugins/lualine.nix
     ./plugins/mini.nix
