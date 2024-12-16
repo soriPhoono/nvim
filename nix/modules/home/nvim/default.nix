@@ -4,13 +4,17 @@
 
     ./core/opts.nix
     ./core/keymaps.nix
-    
+
     ./plugins/cmp.nix
+    ./plugins/conform.nix
     ./plugins/lsp.nix
+    ./plugins/lualine.nix
+    ./plugins/mini.nix
     ./plugins/neorg.nix
+    ./plugins/neotree.nix
+    ./plugins/noice.nix
     ./plugins/telescope.nix
     ./plugins/treesitter.nix
-    ./plugins/ui.nix
     ./plugins/util.nix
   ];
 
