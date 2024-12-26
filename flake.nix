@@ -29,8 +29,6 @@
     src = ./.;
 
     snowfall = {
-      root = ./nix;
-
       namespace = "soriphoono.nvim";
 
       meta = {

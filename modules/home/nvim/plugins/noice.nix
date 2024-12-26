@@ -5,6 +5,8 @@
     notify = {
       enable = true;
       render = "compact";
+
+      timeout = 2500;
     };
 
     noice = {
