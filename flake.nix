@@ -36,5 +36,7 @@
         title = "Personal neovim configuration";
       };
     };
+
+    alias.modules.home.default = "nvim";
   };
 }
