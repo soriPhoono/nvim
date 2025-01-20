@@ -4,41 +4,58 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    snowfall-lib = {
-      url = "github:snowfallorg/lib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flake-utils.url = "github:numtide/flake-utils";
 
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     nixvim = {
       url = "github:nix-community/nixvim";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
       };
     };
   };
 
-  outputs = inputs @ {snowfall-lib, ...}:
-    snowfall-lib.mkFlake {
-      inherit inputs;
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    pre-commit-hooks,
+    nixvim,
+  }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      formatter = pkgs.alejandra;
 
-      src = ./.;
-      snowfall.namespace = "NAME HERE";
+      checks.pre-commit-checks = pre-commit-hooks.lib.${system}.run {
+        src = ./.;
 
-      outputs-builder = channels: {
-        formatter = channels.nixpkgs.alejandra;
+        hooks = {
+          gptcommit.enable = true;
+
+          alejandra.enable = true;
+          flake-checker.enable = true;
+          statix.enable = true;
+        };
       };
 
-      alias = {
-        shells.default = "development";
+      devShells.default = let
+        inherit (self.checks.${system}) pre-commit-checks;
+      in
+        pkgs.mkShell {
+          inherit (pre-commit-checks) shellHook;
+
+          packages = with pkgs; [
+            nixd
+          ];
+
+          buildInputs = pre-commit-checks.enabledPackages;
+        };
+
+      packages = {
+        hollace = nixvim.legacyPackages.${system}.makeNixvim (import ./nvim/hollace);
       };
-    };
+    });
 }
