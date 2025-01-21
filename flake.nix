@@ -21,7 +21,9 @@
     pre-commit-hooks,
     nixvim,
     ...
-  }:
+  }: let
+    inherit (nixpkgs) lib;
+  in
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
     in {
@@ -50,6 +52,6 @@
       packages = builtins.mapAttrs (author: module: nixvim.legacyPackages.${system}.makeNixvim module) self.nixvimModules;
     })
     // flake-utils.lib.eachDefaultSystemPassThrough (system: {
-      nixvimModules.hollace = import ./nvim/hollace;
+      nixvimModules = import ./nvim {inherit lib;};
     });
 }
