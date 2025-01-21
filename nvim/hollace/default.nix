@@ -1,7 +1,5 @@
 {
   imports = [
-    (import ../themes/catppuccin.nix {})
-
     ./core/opts.nix
     ./core/keymaps.nix
 

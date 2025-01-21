@@ -47,9 +47,9 @@
         buildInputs = self.checks.${system}.default.enabledPackages;
       };
 
-      packages.hollace = nixvim.legacyPackages.${system}.makeNixvim self.nixvimModules.hollace;
+      packages = builtins.mapAttrs (author: module: nixvim.legacyPackages.${system}.makeNixvim module) self.nixvimModules;
     })
     // flake-utils.lib.eachDefaultSystemPassThrough (system: {
-      nixvimModules.hollace = import ./modules/nvim/hollace;
+      nixvimModules.hollace = import ./nvim/hollace;
     });
 }
