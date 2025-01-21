@@ -1,13 +1,10 @@
 {
-  description = "Basic flake for a nix project";
+  description = "Registry flake for various neovim configurations";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    snowfall-lib = {
-      url = "github:snowfallorg/lib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flake-utils.url = "github:numtide/flake-utils";
 
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
 
@@ -17,24 +14,42 @@
     };
   };
 
-  outputs = inputs @ {snowfall-lib, ...}: let
-    lib = snowfall-lib.mkLib {
-      inherit inputs;
-      src = ./.;
-    };
-  in
-    lib.mkFlake {
-      inherit inputs;
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    pre-commit-hooks,
+    nixvim,
+    ...
+  }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      checks.default = pre-commit-hooks.lib.${system}.run {
+        src = ./.;
 
-      src = ./.;
-      snowfall.namespace = "NAME HERE";
+        hooks = {
+          gptcommit.enable = true;
 
-      outputs-builder = channels: {
-        formatter = channels.nixpkgs.alejandra;
+          alejandra.enable = true;
+          flake-checker.enable = true;
+          statix.enable = true;
+        };
       };
 
-      alias = {
-        shells.default = "development";
+      devShells.default = pkgs.mkShell {
+        inherit (self.checks.${system}.default) shellHook;
+
+        packages = with pkgs; [
+          nixd
+        ];
+
+        buildInputs = self.checks.${system}.default.enabledPackages;
       };
-    };
+
+      packages.hollace = nixvim.legacyPackages.${system}.makeNixvim self.nixvimModules.hollace;
+    })
+    // flake-utils.lib.eachDefaultSystemPassThrough (system: {
+      nixvimModules.hollace = import ./modules/nvim/hollace;
+    });
 }
