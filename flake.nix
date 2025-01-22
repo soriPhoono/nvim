@@ -32,33 +32,33 @@
       src = ./.;
       snowfall.namespace = "neovim";
     }
-    // flake-utils.lib.eachDefaultSystem (
-      system: let
-        inherit (nixpkgs) lib;
-      in {
-        packages = let
-          users =
-            lib.attrNames
-            (lib.filterAttrs
-              (name: type: type == "directory" && builtins.pathExists ./editors/${name}/default.nix)
-              (builtins.readDir ./editors));
-        in
-          (
-            lib.genAttrs
-            users
-            (name: nixvim.legacyPackages.${system}.makeNixvim (import ./editors/${name}))
-          )
-          // (lib.genAttrs
-            (map (name: "${name}_workspace") users)
-            (name:
-              nixvim.legacyPackages.${system}.makeNixvimWithModule {
-                module = _: {
-                  imports = [
-                    ./editors/${name}/plugins
-                    ./editors/${name}
-                  ];
-                };
-              }));
-      }
-    );
+    // flake-utils.lib.eachDefaultSystem (system: let
+      inherit (nixpkgs) lib;
+    in {
+      packages = let
+        users =
+          lib.attrNames
+          (lib.filterAttrs
+            (name: type: type == "directory" && builtins.pathExists ./editors/${name}/default.nix)
+            (builtins.readDir ./editors));
+      in
+        (
+          lib.genAttrs
+          users
+          (name: nixvim.legacyPackages.${system}.makeNixvim (import ./editors/${name}))
+        )
+        // (lib.genAttrs
+          (map (name: "${name}_workspace") users)
+          (name:
+            nixvim.legacyPackages.${system}.makeNixvimWithModule {
+              module = _: {
+                imports = let
+                  username = lib.elemAt (lib.splitString "_" name) 0;
+                in [
+                  ./editors/${username}/plugins
+                  ./editors/${username}
+                ];
+              };
+            }));
+    });
 }
