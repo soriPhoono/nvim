@@ -6,7 +6,7 @@
       {
         action = "<cmd>w<CR>";
         key = "<C-s>";
-        options.desc = "Close current file or editor";
+        options.desc = "Save current file";
       }
       {
         action = "<cmd>qall<CR>";
