@@ -19,39 +19,34 @@
     nixpkgs,
     flake-utils,
     pre-commit-hooks,
-    nixvim,
     ...
   }: let
-    inherit (nixpkgs) lib;
+    lib = nixpkgs.lib.extend (
+      final: prev:
+        import ./lib {inherit (nixpkgs) lib;}
+    );
   in
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      checks.default = pre-commit-hooks.lib.${system}.run {
-        src = ./.;
-
-        hooks = {
-          gptcommit.enable = true;
-
-          alejandra.enable = true;
-          flake-checker.enable = true;
-          statix.enable = true;
-        };
+      checks.pre-commit-hooks = import ./pre-commit-hooks.nix {
+        inherit pre-commit-hooks pkgs;
       };
 
-      devShells.default = pkgs.mkShell {
-        inherit (self.checks.${system}.default) shellHook;
-
-        packages = with pkgs; [
-          nixd
-        ];
-
-        buildInputs = self.checks.${system}.default.enabledPackages;
+      devShells.default = import ./shell.nix {
+        inherit self pkgs;
       };
 
-      packages = builtins.mapAttrs (author: module: nixvim.legacyPackages.${system}.makeNixvim module) self.nixvimModules;
-    })
-    // flake-utils.lib.eachDefaultSystemPassThrough (system: {
-      nixvimModules = import ./nvim {inherit lib;};
+      packages =
+        lib.mapAttrs
+        (name: type:
+          if type == "directory"
+          then import ./nvim/${name}/default.nix
+          else if type == "regular"
+          then import ./nvim/${name}
+          else {message = "Failed to load module ${name}";})
+        (lib.filterAttrs
+          (name: type: (type == "directory" && builtins.pathExists ./nvim/${name}/default.nix) || type == "regular")
+          (builtins.readDir ./nvim));
     });
 }
