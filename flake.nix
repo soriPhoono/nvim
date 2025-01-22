@@ -20,6 +20,7 @@
   };
 
   outputs = inputs @ {
+    self,
     nixpkgs,
     flake-utils,
     snowfall-lib,
@@ -32,16 +33,36 @@
       src = ./.;
       snowfall.namespace = "neovim";
     }
-    // flake-utils.lib.eachDefaultSystem (
+    // flake-utils.lib.eachDefaultSystemPassThrough (
       system: let
         inherit (nixpkgs) lib;
+
+        pkgs = nixpkgs.legacyPackages.${system};
       in {
-        packages =
+        nixvimModules =
           lib.mapAttrs
-          (name: type: nixvim.legacyPackages.${system}.makeNixvim (import ./nvim/${name}/default.nix))
+          (name: type: import ./nvim/${name}/default.nix)
           (lib.filterAttrs
             (name: type: type == "directory" && builtins.pathExists ./nvim/${name}/default.nix)
             (builtins.readDir ./nvim));
+
+        nixvimConfigurations =
+          lib.mapAttrs
+          (name: type:
+            nixvim.legacyPackages.${system}.makeNixvimWithModule {
+              inherit pkgs;
+
+              module = _: {
+                imports =
+                  (lib.mapAttrsToList (name: module: module) self.nixvimModules)
+                  ++ [
+                    ./editors/${name}/default.nix
+                  ];
+              };
+            })
+          (lib.filterAttrs
+            (name: type: type == "directory" && builtins.pathExists ./editors/${name}/default.nix)
+            (builtins.readDir ./editors));
       }
     );
 }
