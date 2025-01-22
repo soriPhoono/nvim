@@ -1,8 +1,9 @@
 {
-  pre-commit-hooks,
-  pkgs ? import <nixpkgs> {},
+  inputs,
+  system,
+  ...
 }:
-pre-commit-hooks.lib.${pkgs.system}.run {
+inputs.pre-commit-hooks.lib.${system}.run {
   src = ./.;
 
   hooks = {

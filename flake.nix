@@ -6,6 +6,11 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
 
     nixvim = {
@@ -14,39 +19,29 @@
     };
   };
 
-  outputs = {
-    self,
+  outputs = inputs @ {
     nixpkgs,
     flake-utils,
-    pre-commit-hooks,
+    snowfall-lib,
+    nixvim,
     ...
-  }: let
-    lib = nixpkgs.lib.extend (
-      final: prev:
-        import ./lib {inherit (nixpkgs) lib;}
+  }:
+    snowfall-lib.mkFlake {
+      inherit inputs;
+
+      src = ./.;
+      snowfall.namespace = "neovim";
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system: let
+        inherit (nixpkgs) lib;
+      in {
+        packages =
+          lib.mapAttrs
+          (name: type: nixvim.legacyPackages.${system}.makeNixvim (import ./nvim/${name}/default.nix))
+          (lib.filterAttrs
+            (name: type: type == "directory" && builtins.pathExists ./nvim/${name}/default.nix)
+            (builtins.readDir ./nvim));
+      }
     );
-  in
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      checks.pre-commit-hooks = import ./pre-commit-hooks.nix {
-        inherit pre-commit-hooks pkgs;
-      };
-
-      devShells.default = import ./shell.nix {
-        inherit self pkgs;
-      };
-
-      packages =
-        lib.mapAttrs
-        (name: type:
-          if type == "directory"
-          then import ./nvim/${name}/default.nix
-          else if type == "regular"
-          then import ./nvim/${name}
-          else {message = "Failed to load module ${name}";})
-        (lib.filterAttrs
-          (name: type: (type == "directory" && builtins.pathExists ./nvim/${name}/default.nix) || type == "regular")
-          (builtins.readDir ./nvim));
-    });
 }
