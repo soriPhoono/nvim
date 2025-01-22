@@ -20,7 +20,6 @@
   };
 
   outputs = inputs @ {
-    self,
     nixpkgs,
     flake-utils,
     snowfall-lib,
@@ -33,36 +32,33 @@
       src = ./.;
       snowfall.namespace = "neovim";
     }
-    // flake-utils.lib.eachDefaultSystemPassThrough (
+    // flake-utils.lib.eachDefaultSystem (
       system: let
         inherit (nixpkgs) lib;
-
-        pkgs = nixpkgs.legacyPackages.${system};
       in {
-        nixvimModules =
-          lib.mapAttrs
-          (name: type: import ./nvim/${name}/default.nix)
-          (lib.filterAttrs
-            (name: type: type == "directory" && builtins.pathExists ./nvim/${name}/default.nix)
-            (builtins.readDir ./nvim));
-
-        nixvimConfigurations =
-          lib.mapAttrs
-          (name: type:
-            nixvim.legacyPackages.${system}.makeNixvimWithModule {
-              inherit pkgs;
-
-              module = _: {
-                imports =
-                  (lib.mapAttrsToList (name: module: module) self.nixvimModules)
-                  ++ [
-                    ./editors/${name}/default.nix
+        packages = let
+          users =
+            lib.attrNames
+            (lib.filterAttrs
+              (name: type: type == "directory" && builtins.pathExists ./editors/${name}/default.nix)
+              (builtins.readDir ./editors));
+        in
+          (
+            lib.genAttrs
+            users
+            (name: nixvim.legacyPackages.${system}.makeNixvim (import ./editors/${name}))
+          )
+          // (lib.genAttrs
+            (map (name: "${name}_workspace") users)
+            (name:
+              nixvim.legacyPackages.${system}.makeNixvimWithModule {
+                module = _: {
+                  imports = [
+                    ./editors/${name}/plugins
+                    ./editors/${name}
                   ];
-              };
-            })
-          (lib.filterAttrs
-            (name: type: type == "directory" && builtins.pathExists ./editors/${name}/default.nix)
-            (builtins.readDir ./editors));
+                };
+              }));
       }
     );
 }

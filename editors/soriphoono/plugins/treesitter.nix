@@ -1,4 +1,10 @@
 {
+  opts = {
+    foldenable = false;
+    foldmethod = "expr";
+    foldexpr = "v:lua.vim.treesitter.foldexpr()";
+  };
+
   plugins = {
     treesitter-context.enable = true;
     ts-context-commentstring.enable = true;

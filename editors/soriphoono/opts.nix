@@ -1,6 +1,4 @@
 {
-  clipboard.providers.wl-copy.enable = true;
-
   globals = {
     mapleader = " ";
     maplocalleader = " ";
@@ -22,10 +20,6 @@
     tabstop = 2;
     softtabstop = 2;
     shiftwidth = 2;
-
-    foldenable = false;
-    foldmethod = "expr";
-    foldexpr = "v:lua.vim.treesitter.foldexpr()";
 
     history = 2000;
     undofile = true;

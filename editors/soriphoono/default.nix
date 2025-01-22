@@ -1,13 +1,14 @@
 {
   imports = [
-    ./plugins/cmp.nix
-    ./plugins/dashboard.nix
-    ./plugins/lsp.nix
-    ./plugins/lualine.nix
-    ./plugins/neotree.nix
-    ./plugins/noice.nix
-    ./plugins/telescope.nix
-    ./plugins/treesitter.nix
-    ./plugins/util.nix
+    ./keymaps.nix
+    ./opts.nix
   ];
+
+  colorschemes.catppuccin = {
+    enable = true;
+    settings = {
+      flavor = "macchiato";
+      transparent_background = true;
+    };
+  };
 }
