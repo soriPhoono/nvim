@@ -13,10 +13,12 @@ return {
   keys = {
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
+  lazy = false,
   opts = {
     filesystem = {
       hijack_netrw_behavior = 'open_current',
       window = {
+        position = 'left',
         mappings = {
           ['\\'] = 'close_window',
         },
