@@ -51,6 +51,7 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = {
+        globalstatus = true,
         theme = theme("frappe"),
         component_separators = "",
         section_separators = {
@@ -103,7 +104,12 @@ return {
         },
       },
       tabline = {},
-      extensions = {},
+      extensions = {
+        "neo-tree",
+        "mason",
+        "toggleterm",
+        "trouble",
+      },
     },
   },
 }

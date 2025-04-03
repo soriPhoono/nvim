@@ -25,7 +25,7 @@ return {
         },
         python = {
           "isort",
-          "black",
+          "autopep8",
         },
       },
     },
