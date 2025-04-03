@@ -164,6 +164,8 @@ return {
       vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
 
+        "isort", -- Sort python import statements
+        "autopep8", -- Used to format python code
         "flake8", -- Used to lint Python code
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
