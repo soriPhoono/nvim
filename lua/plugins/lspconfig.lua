@@ -175,6 +175,8 @@ return {
 
         "isort", -- Sort python import statements
         "autopep8", -- Used to format python code
+
+        "yamlfmt", -- Used to format yaml
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
