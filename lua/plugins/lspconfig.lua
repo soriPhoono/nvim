@@ -166,16 +166,45 @@ return {
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        "shellcheck",
-        "shellharden",
-        "shfmt",
+        -- bash
+        "shellcheck", -- Check bash code
+        "shellharden", -- Secure bash code
+        "shfmt", -- Format bash code
 
-        "luacheck",
+        -- lua
+        "luacheck", -- Check Lua code
         "stylua", -- Used to format Lua code
 
+        -- Assembly
+        "asm-lsp", -- Language server for assembly
+        "asmfmt", -- Formatter for assembly
+
+        -- C/C++
+        "cpplint",
+        "clang-format",
+
+        -- cmake
+        "cmake-language-server",
+        "cmakelang",
+
+        -- Rust
+        -- Zig
+        --
+
+        -- python
         "isort", -- Sort python import statements
         "autopep8", -- Used to format python code
 
+        -- ansible
+        "ansible-language-server",
+
+        -- jinja
+        "jinja-lsp",
+
+        -- CSS
+        "css-lsp",
+
+        -- yaml
         "yamlfmt", -- Used to format yaml
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
