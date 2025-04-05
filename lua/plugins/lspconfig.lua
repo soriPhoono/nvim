@@ -148,7 +148,7 @@ return {
         clangd = {},
         rust_analyzer = {},
 
-        pyright = {},
+        pylsp = {},
       }
 
       -- Ensure the servers and tools above are installed
