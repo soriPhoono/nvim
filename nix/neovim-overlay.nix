@@ -32,18 +32,9 @@ with final.pkgs.lib; let
     # https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=vimPlugins
     nvim-treesitter.withAllGrammars
     luasnip # snippets | https://github.com/l3mon4d3/luasnip/
-    # nvim-cmp (autocompletion) and extensions
-    nvim-cmp # https://github.com/hrsh7th/nvim-cmp
-    cmp_luasnip # snippets autocompletion extension for nvim-cmp | https://github.com/saadparwaiz1/cmp_luasnip/
-    lspkind-nvim # vscode-like LSP pictograms | https://github.com/onsails/lspkind.nvim/
-    cmp-nvim-lsp # LSP as completion source | https://github.com/hrsh7th/cmp-nvim-lsp/
-    cmp-nvim-lsp-signature-help # https://github.com/hrsh7th/cmp-nvim-lsp-signature-help/
-    cmp-buffer # current buffer as completion source | https://github.com/hrsh7th/cmp-buffer/
-    cmp-path # file paths as completion source | https://github.com/hrsh7th/cmp-path/
-    cmp-nvim-lua # neovim lua API as completion source | https://github.com/hrsh7th/cmp-nvim-lua/
-    cmp-cmdline # cmp command line suggestions
-    cmp-cmdline-history # cmp command line history suggestions
-    # ^ nvim-cmp extensions
+    # blink-cmp (autocompletion) and extensions
+    blink-cmp # https://github.com/Saghen/blink.cmp
+    # ^ blink-cmp
     # git integration plugins
     diffview-nvim # https://github.com/sindrets/diffview.nvim/
     neogit # https://github.com/TimUntersberger/neogit/
@@ -60,6 +51,11 @@ with final.pkgs.lib; let
     nvim-navic # Add LSP location to lualine | https://github.com/SmiteshP/nvim-navic
     statuscol-nvim # Status column | https://github.com/luukvbaal/statuscol.nvim/
     nvim-treesitter-context # nvim-treesitter-context
+    nvim-notify # Fancy notification window | https://github.com/rcarriga/nvim-notify
+    noice-nvim # UI enhancements (cmdline, messages, etc.) | https://github.com/folke/noice.nvim
+    neo-tree-nvim # File tree explorer | https://github.com/nvim-neo-tree/neo-tree.nvim
+    catppuccin-nvim # Soothing color scheme | https://github.com/catppuccin/nvim
+    mini-nvim # Starter (start screen), and other mini modules | https://github.com/echasnovski/mini.nvim
     # ^ UI
     # language support
     # ^ language support
